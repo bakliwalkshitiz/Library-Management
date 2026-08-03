@@ -1,0 +1,19 @@
+# IDE & System files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.DS_Store
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/*.local
+frontend/npm-debug.log*
+
+# Java / Maven / Backend
+library-management-system/target/
+target/
+*.log

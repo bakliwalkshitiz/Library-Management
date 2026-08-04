@@ -47,7 +47,7 @@ This Library Management System supports three distinct user roles:
 When the backend starts for the first time, a master admin account is automatically created:
 
 - **Email**: `leader@gmail.com`
-- **Password**: `Kshitiz977@`
+- **Password**: ``
 - **Role**: `ADMIN`
 
 ---
@@ -69,7 +69,7 @@ Ensure your local MySQL server is running. The application will automatically cr
 - **Host**: `localhost:3306`
 - **Database Name**: `library_db`
 - **Default Username**: `root`
-- **Default Password**: `Bakliwal@mysql` *(update in `application-dev.properties` if your password is different)*
+- **Default Password**: `` *(update in `application-dev.properties` if your password is different)*
 
 ---
 

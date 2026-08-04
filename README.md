@@ -1,140 +1,144 @@
 # 📚 Library Management System
 
-![Java 17](https://img.shields.io/badge/Java-17-orange?logo=openjdk)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3-brightgreen?logo=springboot)
-![React](https://img.shields.io/badge/React-18-blue?logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)
-![MySQL](https://img.shields.io/badge/MySQL-8.0-blue?logo=mysql)
-![Docker](https://img.shields.io/badge/Docker-Ready-cyan?logo=docker)
-![License](https://img.shields.io/badge/License-MIT-green)
+A full-stack web application for managing library operations, digital book reading, publisher content management, and user borrowing records.
 
-A full-stack, enterprise-grade **Library Management System** designed for managing library operations, digital book reading, publisher content management, and user borrowing records.
-
-Built with **Spring Boot 3**, **React 18 (TypeScript + Material UI)**, and **MySQL**, fully dockerized for containerized deployment.
+Built with **Spring Boot 3** on the backend and **React 18 (TypeScript)** on the frontend with **MySQL** database.
 
 ---
 
-## 🌟 Key Features
+## 💡 About The Project
 
-### 👑 Admin Panel
-- **Master Management**: Manage all books, categories, authors, users, and borrowing transactions.
-- **Role Assignment**: Elevate accounts and manage user permissions.
-- **System Settings**: Control master configuration and super-admin credentials.
+This Library Management System supports three distinct user roles:
 
-### 🏢 Publisher Panel
-- **Publisher Dashboard**: Dedicated workspace for publishers to upload, edit, and manage books.
-- **Publisher Data Isolation**: Publishers strictly see and manage only their own created books, categories, and authors.
-- **Payment Setup**: Upload custom UPI ID and payment QR code for monetized titles.
-
-### 📖 Reader / User Portal
-- **Browse & Filter**: Search books by title, author, category, or real-time availability.
-- **In-App PDF Reader**: View digital book PDFs directly in the browser with page controls.
-- **Book Issuing & Return**: Request and return books with automated availability updates.
-- **Direct UPI Payments**: Pay for premium titles directly to the publisher's QR code.
-
-### 🔐 Security & Authentication
-- **JWT Security**: 24-hour token expiration with automatic redirection on expiry.
-- **Role-Based Access Control (RBAC)**: Strict authorization for `ADMIN`, `PUBLISHER`, and `USER`.
+1. **Admin**: Has full access to manage all books, categories, authors, users, and borrowing records.
+2. **Publisher**: Dedicated panel where publishers can create and manage their own books, authors, and categories, as well as set up UPI payment details for paid books.
+3. **User / Reader**: Can browse available books, read digital PDFs directly in the browser, issue/return books, and make payments for premium books.
 
 ---
 
-## 🌐 Backend REST Controllers API Reference
+## ⚡ Key Features
 
-The backend provides **11 REST Controllers** handling all application modules:
-
-| Controller | Base Path | Roles | Description |
-| :--- | :--- | :--- | :--- |
-| **`AuthController`** | `/auth` | Public | Signup (`/register`) and Login (`/login`) with JWT generation |
-| **`BookController`** | `/books` | `USER`, `PUBLISHER`, `ADMIN` | Book CRUD operations, search, and publisher-isolated book listing |
-| **`BookDetailController`** | `/books` | `PUBLISHER`, `ADMIN`, `USER` | Digital PDF content upload and reader endpoint |
-| **`AuthorController`** | `/authors` | `ADMIN`, `PUBLISHER`, `USER` | Author management for Admins & Publishers |
-| **`CategoryController`** | `/categories` | `ADMIN`, `PUBLISHER`, `USER` | Category creation and isolated publisher category listings |
-| **`UserController`** | `/users` | `ADMIN`, `PUBLISHER`, `USER` | User profiles, role updates, and publisher UPI/QR setup |
-| **`BorrowRecordController`** | `/borrow-records` | `USER`, `PUBLISHER`, `ADMIN` | Issue books, return books, and user borrowing logs |
-| **`DashboardController`** | `/dashboard` | `ADMIN`, `PUBLISHER` | Summary statistics (books, users, authors, borrows) |
-| **`PaymentConfigController`** | `/payment-config` | `USER`, `PUBLISHER` | Fetch UPI ID and QR code for paid books |
-| **`AiAssistantController`** | `/ai` | `USER`, `PUBLISHER` | OpenAI AI Reading Assistant Integration |
-| **`HomeController`** | `/` | Public | API health check status |
+- **🔐 Authentication & Security**: JWT-based login with 24-hour token expiration and role-based access control (`ADMIN`, `PUBLISHER`, `USER`).
+- **📖 In-App PDF Reader**: View digital book PDFs directly inside the app with smooth page navigation.
+- **🏢 Publisher Isolation**: Publishers only see and manage their own created books, authors, and categories.
+- **💳 Payment Integration**: Support for paid books with custom UPI ID and QR code payment upload.
+- **🤖 AI Reading Assistant**: OpenAI integration for book summaries and reader Q&A.
+- **📊 Interactive Dashboards**: Live counters and statistics for Admin and Publisher panels.
 
 ---
 
-## 🔑 Default Admin Credentials
+## 🛠️ Tech Stack
 
-The Spring Boot backend automatically seeds a master admin account on initial launch:
+### Backend
+- **Framework**: Java 17, Spring Boot 3.3
+- **Security**: Spring Security + JWT
+- **Database & ORM**: MySQL 8.0, Spring Data JPA / Hibernate
+- **Build Tool**: Maven
+
+### Frontend
+- **Framework**: React 18, TypeScript, Vite
+- **UI Library**: Material UI (MUI), Lucide Icons, Tailwind CSS
+- **HTTP Client**: Axios with JWT Interceptors
+
+---
+
+## 🔑 Default Login Credentials
+
+When the backend starts for the first time, a master admin account is automatically created:
 
 - **Email**: `leader@gmail.com`
 - **Password**: `Kshitiz977@`
+- **Role**: `ADMIN`
 
 ---
 
-## ⚙️ Environment Variables (Cloud / Render Deployment)
+## 🚀 How to Run Locally
 
-Configure the following environment variables when deploying on **Render**, **Railway**, or **Docker**:
-
-```ini
-# Database Configuration
-SPRING_DATASOURCE_URL=jdbc:mysql://<your-db-host>:3306/library_db
-SPRING_DATASOURCE_USERNAME=root
-SPRING_DATASOURCE_PASSWORD=your_password
-
-# Application Settings
-SPRING_PROFILES_ACTIVE=prod
-OPENAI_API_KEY=your_openai_api_key
-
-# Frontend Environment Variable
-VITE_API_URL=https://your-backend-api.onrender.com
-```
+### Prerequisites
+Make sure you have installed:
+- **Java 17** or higher
+- **Node.js** (v18 or higher)
+- **MySQL Database** (running locally on port `3306`)
 
 ---
 
-## 🚀 Quick Start
+### Step 1: Set Up MySQL Database
 
-### Option 1: Run with Docker Compose
+Ensure your local MySQL server is running. The application will automatically create the database `library_db` on launch.
+
+- **Host**: `localhost:3306`
+- **Database Name**: `library_db`
+- **Default Username**: `root`
+- **Default Password**: `Bakliwal@mysql` *(update in `application-dev.properties` if your password is different)*
+
+---
+
+### Step 2: Start the Backend (Spring Boot)
+
+Open a terminal and run:
 
 ```bash
 cd library-management-system
-docker-compose up -d --build
+./mvnw spring-boot:run
 ```
 
-- **Backend API**: `http://localhost:8080`
-- **MySQL DB Port**: `3307` (mapped to `3306`)
+The backend server will start at: **`http://localhost:8080`**
 
 ---
 
-### Option 2: Run Locally
+### Step 3: Start the Frontend (React + Vite)
 
-#### 1. Backend (Spring Boot)
-```bash
-cd library-management-system
-mvn clean package -DskipTests
-mvn spring-boot:run
-```
+Open a second terminal and run:
 
-#### 2. Frontend (React + Vite)
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-App will run on `http://localhost:5173`.
+The frontend application will start at: **`http://localhost:5173`**
+
+Open your browser and navigate to **`http://localhost:5173`**.
 
 ---
 
-## 📁 Repository Structure
+## 📡 API Endpoints Summary
+
+Below is a simple overview of the main backend API controllers:
+
+| Controller | Route | Description |
+| :--- | :--- | :--- |
+| **`AuthController`** | `/auth` | User registration (`/register`) and login (`/login`) |
+| **`BookController`** | `/books` | Search, filter, add, edit, and delete books |
+| **`BookDetailController`** | `/books` | Upload and fetch digital PDF content |
+| **`AuthorController`** | `/authors` | Manage authors for books |
+| **`CategoryController`** | `/categories` | Manage book categories |
+| **`UserController`** | `/users` | Manage user profiles and roles |
+| **`BorrowRecordController`** | `/borrow-records` | Issue, return, and track borrowed books |
+| **`DashboardController`** | `/dashboard` | Fetch summary stats for Admin/Publisher |
+| **`PaymentConfigController`** | `/payment-config` | Manage UPI & QR payment settings |
+| **`AiAssistantController`** | `/ai` | AI-powered reading assistant endpoint |
+
+---
+
+## 📁 Folder Structure
 
 ```
 library-management-system/
-├── frontend/                     # React + TypeScript + Vite Frontend
-│   ├── src/                      # Pages, Components, Services, Context, Types
-│   ├── package.json
-│   └── vite.config.ts
-├── library-management-system/    # Spring Boot Backend
+├── frontend/                     # React Vite Frontend App
+│   ├── src/                      # Components, Pages, API, Context
+│   └── package.json
+├── library-management-system/    # Spring Boot Backend App
 │   ├── src/main/java/            # Controllers, Entities, Services, Security
-│   ├── src/main/resources/       # application.properties & data.sql
+│   ├── src/main/resources/       # Configuration properties & initial data
 │   ├── Dockerfile
-│   ├── docker-compose.yml
 │   └── pom.xml
-├── .gitignore                    # Git Exclusion Rules
+├── .gitignore                    # Git ignore file
 └── README.md                     # Documentation
 ```
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
